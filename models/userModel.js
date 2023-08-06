@@ -15,7 +15,10 @@ const userSchema = new Schema({
         type: String,
         default: 'agent'
     },
-    phone: String,
+    phone: {
+        type:String,
+        required: false
+    },
     provider: {
         type: String,
         default: "credentials"

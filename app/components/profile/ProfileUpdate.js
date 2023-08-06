@@ -14,13 +14,15 @@ const ProfileUpdate = async () => {
         'use server'
         const name = formData.get('name')
         const image = formData.get('imageUrl')
-        const res = await updateUser({ name, image })
+        const phone = formData.get('phone')
+        const res = await updateUser({ name, image, phone })
         console.log(res?.msg)
+
     }
 
     return (
         <Form action={handleUpdateAction} style={`flex w-full py-6 flex-col justify-start items-center gap-4 `} >
-            <div className={`flex flex-col w-full lg:w-[600px]  justify-start items-start gap-4  `} >
+            <div className={`flex flex-col w-full lg:w-[600px]  p-3 justify-start items-start gap-4  `} >
                 <div className='w-full flex justify-center items-center p-3 ' >
                     <ImageUpload profile />
                 </div>

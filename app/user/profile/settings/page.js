@@ -1,6 +1,5 @@
-import Header from '@/app/components/Header'
-import ProfileUpdate from '@/app/components/profile/ProfileUpdate'
 import React from 'react'
+import ProfileUpdate from '@/app/components/profile/ProfileUpdate'
 
 const page = () => {
     return (
