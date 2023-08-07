@@ -1,21 +1,19 @@
-
 import React from 'react'
 import Form from '../Form'
 import ImageUpload from './ImageUpload'
 import Input from '../authentication/Input'
-import CurrentUser from '@/utlis/currentUser'
 import { updateUser } from '@/actions/authAction'
 
-const ProfileUpdate = async () => {
-
-    const session = await CurrentUser()
-
+const ProfileUpdate = ({ session, update }) => {
     async function handleUpdateAction(formData) {
-        'use server'
+        // 'use server'
         const name = formData.get('name')
         const image = formData.get('imageUrl')
         const phone = formData.get('phone')
         const res = await updateUser({ name, image, phone })
+        if (update) {
+            update({ name, image, phone })
+        }
         console.log(res?.msg)
 
     }

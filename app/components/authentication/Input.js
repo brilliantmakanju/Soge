@@ -34,7 +34,6 @@ const Input = ({
         disabled:bg-neutral-300 
          transition 
          rounded-md duration-300 ease-in-out
-          focus:ring-[5px] focus:ring-primary-300
          placeholder:text-white
         disabled:cursor-not-allowed 
         disabled:opacity-30 ${style} `}

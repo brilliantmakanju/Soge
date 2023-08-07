@@ -84,7 +84,7 @@ const Table = ({ properties }) => {
                                             aria-labelledby="responsive-dialog-title"
                                         >
                                             <DialogTitle id="responsive-dialog-title">
-                                                {"Use Google's location service?"}
+                                                {"Delete Mansion "}
                                             </DialogTitle>
                                             <DialogContent>
                                                 <DialogContentText>

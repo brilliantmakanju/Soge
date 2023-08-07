@@ -16,7 +16,8 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import { signOut, useSession } from 'next-auth/react';
-import Logout from './authentication/Logout';
+import Logout from '@/app/components/authentication/Logout';
+import { Skeleton } from '@mui/material';
 
 
 
@@ -151,83 +152,114 @@ function ResponsiveAppBar(props) {
                         </Box>
 
                         {
-                            status === 'loading' ?
-
-                                <></>
-
-                                :
-
+                            status === 'unauthenticated'
+                                ?
                                 <>
                                     {
                                         session
+
                                             ?
-                                            <Box sx={{ flexGrow: 0 }}>
-                                                <Tooltip title={`${session?.user?.name}`}>
-                                                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                                        <Avatar alt="Remy Sharp" src={session?.user?.image} />
-                                                    </IconButton>
-                                                </Tooltip>
-                                                <Menu
-                                                    sx={{ mt: '40px', display: 'flex', justifyItems: 'start', alignItems: 'start' }}
-                                                    id="menu-appbar"
-                                                    anchorEl={anchorElUser}
-                                                    anchorOrigin={{
-                                                        vertical: 'top',
-                                                        horizontal: 'right',
-                                                    }}
-                                                    keepMounted
-                                                    transformOrigin={{
-                                                        vertical: 'top',
-                                                        horizontal: 'right',
-                                                    }}
-                                                    open={Boolean(anchorElUser)}
-                                                    onClose={handleCloseUserMenu}
-                                                >
-                                                    <MenuItem className='flex flex-col justify-start items-start text-left gap-8' onClick={handleCloseUserMenu}>
-                                                        <Link href="/user/profile">
-                                                            Profile
-                                                        </Link>
-                                                    </MenuItem>
-                                                    <MenuItem className='flex flex-col justify-start items-start text-left gap-8' onClick={handleCloseUserMenu}>
-                                                        <Link className='flex flex-col justify-start items-start text-left gap-8' href="/">
-                                                            Dashboard
-                                                        </Link>
-                                                    </MenuItem>
-                                                    <MenuItem className='flex flex-col justify-start items-start text-left gap-8' onClick={handleCloseUserMenu}>
-                                                        <Link className='flex flex-col justify-start items-start text-left gap-8' href="/user/properties">
-                                                            Properties
-                                                        </Link>
-                                                    </MenuItem>
-                                                    <MenuItem className='flex flex-col justify-start items-start text-left gap-8' onClick={handleCloseUserMenu}>
-                                                        <Link className='flex flex-col justify-start items-start text-left gap-8' href="/user/profile/settings">
-                                                            Setting
-                                                        </Link>
-                                                    </MenuItem>
-                                                    <MenuItem className='flex flex-col justify-start items-start text-left gap-8' onClick={handleCloseUserMenu}>
-                                                        <Logout />
-                                                    </MenuItem>
-                                                </Menu>
-                                            </Box>
+                                            <></>
 
                                             :
                                             <>
                                                 <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 2, display: { xs: 'none', md: 'flex ' } }} >
-                                                    <Link className='flex  ' href={"/"}>
+                                                    <Link className='flex  ' href={"/register"}>
                                                         Register
                                                     </Link>
-                                                    <Link className='flex justify-center items-center p-3 px-8 rounded-md bg-[#00204A] hover:bg-[#00204a6a] border-[2px]  border-[#00204A] transition duration-300 ease-in-out ' href={"/authentication/login"}>
+                                                    <Link className='flex justify-center items-center p-3 px-8 rounded-md bg-[#00204A] hover:bg-[#00204a6a] border-[2px]  border-[#00204A] transition duration-300 ease-in-out ' href={"/login"}>
                                                         Login
                                                     </Link>
                                                 </Box>
                                                 <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 2, display: { xs: 'flex', md: 'none ' } }} >
-                                                    <Link className='flex justify-center items-center p-2 px-6 rounded-md bg-[#00204A] hover:bg-[#00204a6a] border-[2px]  border-[#00204A] transition duration-300 ease-in-out ' href={"/authentication/login"}>
+                                                    <Link className='flex justify-center items-center p-2 px-6 rounded-md bg-[#00204A] hover:bg-[#00204a6a] border-[2px]  border-[#00204A] transition duration-300 ease-in-out ' href={"/login"}>
                                                         Login
                                                     </Link>
                                                 </Box>
                                             </>
                                     }
                                 </>
+                                :
+                                <></>
+
                         }
+
+                        {
+                            session
+                                ?
+                                <>
+                                    {
+                                        status === 'authenticated' ?
+                                            <>
+
+                                                <Box sx={{ flexGrow: 0 }}>
+                                                    <Tooltip title={`${session?.user?.name}`}>
+                                                        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                                            <Avatar alt="Remy Sharp" src={session?.user?.image} />
+                                                        </IconButton>
+                                                    </Tooltip>
+                                                    <Menu
+                                                        sx={{ mt: '40px', display: 'flex', justifyItems: 'start', alignItems: 'start' }}
+                                                        id="menu-appbar"
+                                                        anchorEl={anchorElUser}
+                                                        anchorOrigin={{
+                                                            vertical: 'top',
+                                                            horizontal: 'right',
+                                                        }}
+                                                        keepMounted
+                                                        transformOrigin={{
+                                                            vertical: 'top',
+                                                            horizontal: 'right',
+                                                        }}
+                                                        open={Boolean(anchorElUser)}
+                                                        onClose={handleCloseUserMenu}
+                                                    >
+                                                        <MenuItem className='flex flex-col justify-start items-start text-left gap-8'  onClick={handleCloseUserMenu}>
+                                                            <Link className='flex w-full justify-start items-start' href="/user/profile">
+                                                                Profile
+                                                            </Link>
+                                                        </MenuItem>
+                                                        <MenuItem className='flex flex-col justify-start items-start text-left gap-8' onClick={handleCloseUserMenu}>
+                                                            <Link className='flex w-full justify-start items-start' href="/">
+                                                                Dashboard
+                                                            </Link>
+                                                        </MenuItem>
+                                                        <MenuItem className='flex flex-col justify-start items-start text-left gap-8' onClick={handleCloseUserMenu}>
+                                                            <Link className='flex w-full justify-start items-start'href="/user/properties">
+                                                                Properties
+                                                            </Link>
+                                                        </MenuItem>
+                                                        <MenuItem className='flex flex-col justify-start items-start text-left gap-8' onClick={handleCloseUserMenu}>
+                                                            <Link className='flex w-full justify-start items-start' href="/user/profile/settings">
+                                                                Setting
+                                                            </Link>
+                                                        </MenuItem>
+                                                        {
+                                                            session?.user?.provider === 'credentials' 
+                                                                ?
+                                                                <MenuItem className='flex flex-col justify-start items-start text-left gap-8' onClick={handleCloseUserMenu}>
+                                                                    <Link className='flex w-full justify-start items-start' href="/user/changepassword">
+                                                                        Change Password
+                                                                    </Link>
+                                                                </MenuItem>
+                                                                :
+                                                                <></>
+                                                        }
+                                                        <MenuItem className='flex flex-col justify-start items-start text-left gap-8' onClick={handleCloseUserMenu}>
+                                                            <Logout />
+                                                        </MenuItem>
+                                                    </Menu>
+                                                </Box>
+
+                                            </>
+                                            :
+                                            <Skeleton animation="wave" variant="circular" width={50} height={50} />
+                                    }
+                                </>
+                                :
+                                <></>
+                        }
+
 
 
 
